@@ -19,7 +19,7 @@ SOURCES = edid-decode.cpp parse-base-block.cpp parse-cta-block.cpp \
 	  parse-di-ext-block.cpp parse-vtb-ext-block.cpp calc-gtf-cvt.cpp
 WARN_FLAGS = -Wall -Wextra -Wno-missing-field-initializers -Wno-unused-parameter -Wimplicit-fallthrough
 
-all: edid-decode
+all: edid-decode libedid-decode.so
 
 sha = -DSHA=$(shell if test -d .git ; then git rev-parse --short=12 HEAD ; fi)
 date = -DDATE=$(shell if test -d .git ; then TZ=UTC git show --quiet --date='format-local:"%F %T"' --format='%cd'; fi)
@@ -32,6 +32,13 @@ edid-decode.js: $(SOURCES) edid-decode.h oui.h Makefile
 
 clean:
 	rm -f edid-decode
+
+# build lib
+libedid-decode.so:
+	$(CXX) $(CPPFLAGS) $(CFLAGS) $(LDFLAGS)	$(WARN_FLAGS) -g $(sha) $(date) -o $@ $(SOURCES) -lm
+
+clean-lib:
+	rm -rf edid-decode.o libedid-decode.so
 
 install:
 	mkdir -p $(DESTDIR)$(bindir)
