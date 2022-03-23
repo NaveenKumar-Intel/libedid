@@ -10,4 +10,4 @@
 * Task 3: Define the structure with relevant info per entity like colorimtery, hdr etc
 * Task 4: Create a test app to use high level wrapper APIs with defined structure, library parses the EDID, fills the structure and returns the same to client
 
-Note: This is an ealry plan and can always be expanded with common understanding amount people around it
+Note: This is an ealry plan and can always be expanded with common understanding among people around it
